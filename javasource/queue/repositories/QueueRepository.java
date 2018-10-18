@@ -1,6 +1,7 @@
 package queue.repositories;
 
 import java.util.List;
+import java.util.TimeZone;
 import java.util.concurrent.ConcurrentHashMap;
 
 import java.util.concurrent.ScheduledExecutorService;
@@ -27,6 +28,7 @@ public final class QueueRepository {
 	private static final Object lock = new Object();
 	private volatile ConcurrentHashMap<String, ScheduledThreadPoolExecutor> queueMap = new ConcurrentHashMap<>();
 	private QueueInfoProvider queueInfoProvider = new QueueInfoProvider(new QueueInfoFactory());
+	private int timeZoneOffset = -1 * TimeZone.getDefault().getOffset(System.currentTimeMillis()) / 60000;
 	
 	public static QueueRepository getInstance() {
 		QueueRepository instance = queueRepository;
@@ -66,5 +68,9 @@ public final class QueueRepository {
 	
 	public IContext getSystemContext() {
 		return Core.createSystemContext();
+	}
+	
+	public int getTimeZoneOffset() {
+		return timeZoneOffset;
 	}
 }

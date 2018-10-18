@@ -14,6 +14,7 @@ import com.mendix.logging.ILogNode;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixIdentifier;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.ISession;
 
 import queue.helpers.ExponentialBackoffCalculator;
 import queue.helpers.JobToQueueAdder;
@@ -33,6 +34,7 @@ public class TestQueueHandler {
 	QueueRepository queueRepository = mock(QueueRepository.class);
 	JobRepository jobRepository = mock(JobRepository.class);
 	IContext context = mock(IContext.class);
+	ISession session = mock(ISession.class);
 	IMendixObject jobObject = mock(IMendixObject.class);
 	ExponentialBackoffCalculator exponentialBackoffCalculator = mock(ExponentialBackoffCalculator.class);
 	Job job = mock(Job.class);
@@ -51,6 +53,8 @@ public class TestQueueHandler {
 		QueueHandler queueHandler = new QueueHandler(logger, jobToQueueAdder, scheduledJobRepository, queueRepository, jobRepository, jobId);
 		
 		when(queueRepository.getSystemContext()).thenReturn(context);
+		when(queueRepository.getTimeZoneOffset()).thenReturn(2);
+		when(context.getSession()).thenReturn(session);
 		when(jobRepository.getJob(context, jobId)).thenReturn(jobObject);
 		when(jobToQueueAdder.getExponentialBackoffCalculator()).thenReturn(exponentialBackoffCalculator);
 		when(exponentialBackoffCalculator.calculate(200, 0)).thenReturn(0);
@@ -88,6 +92,8 @@ public class TestQueueHandler {
 		QueueHandler queueHandler = new QueueHandler(logger, jobToQueueAdder, scheduledJobRepository, queueRepository, jobRepository, jobId);
 		
 		when(queueRepository.getSystemContext()).thenReturn(context);
+		when(queueRepository.getTimeZoneOffset()).thenReturn(2);
+		when(context.getSession()).thenReturn(session);
 		when(jobRepository.getJob(context, jobId)).thenReturn(null).thenReturn(jobObject);
 		when(jobToQueueAdder.getExponentialBackoffCalculator()).thenReturn(exponentialBackoffCalculator);
 		when(exponentialBackoffCalculator.calculate(200, 0)).thenReturn(0);
@@ -125,6 +131,8 @@ public class TestQueueHandler {
 		QueueHandler queueHandler = new QueueHandler(logger, jobToQueueAdder, scheduledJobRepository, queueRepository, jobRepository, jobId);
 		
 		when(queueRepository.getSystemContext()).thenReturn(context);
+		when(queueRepository.getTimeZoneOffset()).thenReturn(2);
+		when(context.getSession()).thenReturn(session);
 		when(jobRepository.getJob(context, jobId)).thenReturn(null);
 		when(jobToQueueAdder.getExponentialBackoffCalculator()).thenReturn(exponentialBackoffCalculator);
 		when(exponentialBackoffCalculator.calculate(200, 0)).thenReturn(0);
@@ -151,6 +159,8 @@ public class TestQueueHandler {
 		QueueHandler queueHandler = new QueueHandler(logger, jobToQueueAdder, scheduledJobRepository, queueRepository, jobRepository, jobId);
 		
 		when(queueRepository.getSystemContext()).thenReturn(context);
+		when(queueRepository.getTimeZoneOffset()).thenReturn(2);
+		when(context.getSession()).thenReturn(session);
 		when(jobRepository.getJob(context, jobId)).thenReturn(null).thenReturn(jobObject);
 		when(jobToQueueAdder.getExponentialBackoffCalculator()).thenReturn(exponentialBackoffCalculator);
 		when(exponentialBackoffCalculator.calculate(200, 0)).thenReturn(0);
@@ -170,6 +180,8 @@ public class TestQueueHandler {
 		QueueHandler queueHandler = new QueueHandler(logger, jobToQueueAdder, scheduledJobRepository, queueRepository, jobRepository, jobId);
 		
 		when(queueRepository.getSystemContext()).thenReturn(context);
+		when(queueRepository.getTimeZoneOffset()).thenReturn(2);
+		when(context.getSession()).thenReturn(session);
 		when(jobRepository.getJob(context, jobId)).thenReturn(jobObject);
 		when(jobToQueueAdder.getExponentialBackoffCalculator()).thenReturn(exponentialBackoffCalculator);
 		when(exponentialBackoffCalculator.calculate(200, 0)).thenReturn(0);
@@ -214,6 +226,8 @@ public class TestQueueHandler {
 		QueueHandler queueHandler = new QueueHandler(logger, jobToQueueAdder, scheduledJobRepository, queueRepository, jobRepository, jobId);
 		
 		when(queueRepository.getSystemContext()).thenReturn(context);
+		when(queueRepository.getTimeZoneOffset()).thenReturn(2);
+		when(context.getSession()).thenReturn(session);
 		when(jobRepository.getJob(context, jobId)).thenReturn(jobObject);
 		when(jobToQueueAdder.getExponentialBackoffCalculator()).thenReturn(exponentialBackoffCalculator);
 		when(exponentialBackoffCalculator.calculate(200, 0)).thenReturn(0);
@@ -258,6 +272,8 @@ public class TestQueueHandler {
 		QueueHandler queueHandler = new QueueHandler(logger, jobToQueueAdder, scheduledJobRepository, queueRepository, jobRepository, jobId);
 		
 		when(queueRepository.getSystemContext()).thenReturn(context);
+		when(queueRepository.getTimeZoneOffset()).thenReturn(2);
+		when(context.getSession()).thenReturn(session);
 		when(jobRepository.getJob(context, jobId)).thenReturn(jobObject);
 		when(jobToQueueAdder.getExponentialBackoffCalculator()).thenReturn(exponentialBackoffCalculator);
 		when(exponentialBackoffCalculator.calculate(200, 0)).thenReturn(0);
@@ -301,6 +317,8 @@ public class TestQueueHandler {
 		QueueHandler queueHandler = new QueueHandler(logger, jobToQueueAdder, scheduledJobRepository, queueRepository, jobRepository, jobId);
 		
 		when(queueRepository.getSystemContext()).thenReturn(context);
+		when(queueRepository.getTimeZoneOffset()).thenReturn(2);
+		when(context.getSession()).thenReturn(session);
 		when(jobRepository.getJob(context, jobId)).thenReturn(jobObject);
 		when(jobToQueueAdder.getExponentialBackoffCalculator()).thenReturn(exponentialBackoffCalculator);
 		when(exponentialBackoffCalculator.calculate(200, 0)).thenReturn(0);

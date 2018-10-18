@@ -1,6 +1,7 @@
 package queue.usecases;
 
 import java.util.HashMap;
+import java.util.TimeZone;
 
 import com.mendix.core.CoreException;
 import com.mendix.logging.ILogNode;
@@ -40,7 +41,8 @@ public class QueueHandler implements Runnable {
 		try {
 			IMendixObject jobObject = null;
 			
-			IContext context = queueRepository.getSystemContext();;
+			IContext context = queueRepository.getSystemContext();
+			context.getSession().setTimeZone(queueRepository.getTimeZoneOffset());
 			
 			int retries = 0;
 			int maxRetries = 10;
